@@ -4,44 +4,6 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// let items = [{
-//     id: '1',
-//     name: 'Nature Lover',
-//     image: 'https://source.unsplash.com/200x150/?nature',
-//     description: 'Awesome experience in beach',
-//     likes: 10,
-//     isBookmarked: false,
-//     comments: [
-//         { id: 1, text: 'Beautiful photo!' },
-//         { id: 2, text: 'I wish I was there!' },
-//     ],
-// },
-// {
-//     id: '2',
-//     name: 'Foodie',
-//     image: 'https://source.unsplash.com/200x150/?food',
-//     description: 'Dinner with my family ...',
-//     likes: 5,
-//     isBookmarked: false,
-//     comments: [
-//         { id: 3, text: 'Looks delicious!' },
-//         { id: 4, text: 'I want to try this recipe!' },
-//     ],
-// },
-// {
-//     id: '3',
-//     name: 'Travel Buddy',
-//     image: 'https://source.unsplash.com/200x150/?travel',
-//     description: 'Travel with friends ....',
-//     likes: 15,
-//     isBookmarked: true,
-//     comments: [
-//         { id: 5, text: 'Amazing view!' },
-//         { id: 6, text: 'I need to plan a trip there!' },
-//         { id: 7, text: 'I need to plan a trip there!' }
-//     ],
-// },];
-
 let items = [
     {
         id: '1',
@@ -117,7 +79,6 @@ let items = [
             { id: 14, text: 'I need to plan a trip there!' },
         ],
     },
-    // Add more items with different image URLs
     {
         id: '7',
         name: 'Nature Lover 3',
@@ -142,10 +103,7 @@ let items = [
             { id: 18, text: 'Must-try recipes!' },
         ],
     },
-    // Add more items with different image URLs
 ];
-
-// Continue adding more items with different image URLs...  
 
 app.use(cors());
 app.use(express.json());
@@ -158,13 +116,10 @@ app.get('/items', (req, res) => {
 
 app.put('/markFavourite/:id', (req, res) => {
     const id = req.params.id;
-    // Find the item with the given ID and update its isBookmarked property
     const item = items.find((item) => item.id === id);
     if (!item) {
         return res.status(404).json({ error: 'Item not found' });
     }
-
-    // Toggle the isBookmarked property (mark/unmark as favorite)
     item.isBookmarked = !item.isBookmarked;
 
     res.json({ message: 'Item marked/unmarked as favorite successfully', item });
